@@ -3,13 +3,7 @@ resource "helm_release" "nginx" {
   repository = "https://charts.bitnami.com/bitnami"
   chart      = "nginx"
 
-  set {
-    name  = "service.type"
-    value = "NodePort"
-  }
-
-  set {
-    name  = "replicaCount"
-    value = "2"
-  }
+  values = [
+    file("${path.module}/values.yaml")
+  ]
 }
